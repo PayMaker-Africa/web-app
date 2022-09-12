@@ -1,0 +1,3 @@
+.data-card {
+  @apply min-w-fit w-full sm:w-fit;
+}
