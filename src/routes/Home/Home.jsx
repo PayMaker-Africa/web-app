@@ -11,7 +11,7 @@ export default function Home() {
         {/* Left Column */}
         <div className="flex flex-col gap-4 flex-[2] flex-wrap basis-full 2xl:basis-3/4">
           {/* Quick Summary */}
-          <div className="flex flex-wrap gap-x-2 gap-y-4 justify-center xl:justify-between items-center flex-shrink-0">
+          <div className="flex flex-wrap gap-x-2 gap-y-4 justify-around items-center flex-shrink-0">
             {/* Bank Accounts */}
             <div className="data-card">
               <DataCard

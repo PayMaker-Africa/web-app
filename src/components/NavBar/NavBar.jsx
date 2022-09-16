@@ -2,7 +2,7 @@ import { useState } from "react"
 import NavItem from "../NavItem/NavItem"
 import { Link } from "react-router-dom"
 
-export default function NavBar({}) {
+export default function NavBar({ hidden }) {
   const navbarSchema = [
     {
       title: "Wallet",
@@ -18,7 +18,7 @@ export default function NavBar({}) {
 
     {
       title: "Cards",
-      icon: <i class="fa-solid fa-credit-card"></i>,
+      icon: <i className="fa-solid fa-credit-card"></i>,
       color: "text-indigo-500",
     },
 
@@ -67,6 +67,7 @@ export default function NavBar({}) {
 
   const [activeNavItem, setActiveNavItem] = useState(0)
   const [navBarShown, setNavBarShown] = useState(true)
+  // const [hideAll, setHideAll] = useState(false)
 
   return (
     <>

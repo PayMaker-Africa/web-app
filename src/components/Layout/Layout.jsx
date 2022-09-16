@@ -7,6 +7,13 @@ import Home from "../../routes/Home/Home"
 import Wallet from "../../routes/Wallet/Wallet"
 import Accounts from "../../routes/Accounts/Accounts"
 import Cards from "../../routes/Cards/Cards"
+import Payments from "../../routes/Payments/Payments"
+import Analytics from "../../routes/Analytics/Analytics"
+import Users from "../../routes/Users/Users"
+import QR from "../../routes/QR/QR"
+import Settings from "../../routes/Settings/Settings"
+import Support from "../../routes/Support/Support"
+import Authentication from "../../routes/Authentication/Authentication"
 
 export default function Layout({ children }) {
   const { darkTheme, setDarkTheme, tabs } = useContext(AppContext)
@@ -91,16 +98,17 @@ export default function Layout({ children }) {
         <div className="dark:bg-slate-800 flex-1 h-full max-h-full overflow-y-scroll">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/authentication" element={<Authentication />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/cards" element={<Cards />} />
-            <Route path="/payments" element={<>Payment Categories</>} />
-            <Route path="/analytics" element={<>Analytics</>} />
-            <Route path="/users" element={<>Business Users</>} />
-            <Route path="/qr" element={<>QR Code</>} />
-            <Route path="/settings" element={<>Settings</>} />
-            <Route path="/support" element={<>Support</>} />
-            <Route path="/logout" element={<>Logout</>} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/logout" element={<Authentication />} />
           </Routes>
         </div>
       </div>

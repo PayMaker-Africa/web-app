@@ -1,6 +1,6 @@
 export default function CreditCard({ card = {} }) {
   return (
-    <div className="bg-black/50 flex-1 h-full flex flex-col justify-around cursor-pointer rounded-lg shadow-black shadow-lg py-4 px-2 text-xs md:text-base lg:text-lg 2xl:text-xl hover:scale-[0.95] ease-linear duration-300">
+    <div className="bg-black/50 flex-1 h-full flex flex-col justify-around cursor-pointer rounded-lg shadow-black shadow-md py-4 px-2 text-xs md:text-base lg:text-lg 2xl:text-xl hover:scale-[0.95] ease-linear duration-300">
       {/* Bank */}
       <div className="flex justify-end items-center p-3">
         <span className="w-12 sm:w-16 md:w-20">

@@ -7,7 +7,7 @@ export default function Accounts({}) {
   return (
     <div className="flex flex-wrap border-red-500 h-full">
       {/* Add Account */}
-      <div className="w-full xl:w-1/2 shadow-inner flex justify-center mb-10">
+      <div className="w-full xl:w-1/2 shadow-inner flex justify-center items-center mb-10">
         <div className="bg-slate-500 p-5 h-96 w-96 mt-10 rounded-lg shadow-md shadow-black flex flex-col gap-8">
           {/* Title */}
           <div className="flex justify-center items-center uppercase underline underline-offset-4 font-sen font-bold text-lg ">
@@ -21,14 +21,14 @@ export default function Accounts({}) {
 
           {/* Select Bank */}
           <CustomSelect
-            icon={<i class="fa-solid fa-building-columns"></i>}
+            icon={<i className="fa-solid fa-building-columns"></i>}
             title="Select Bank"
           />
 
           {/* Account Number */}
           <div className="h-14">
             <CustomInput
-              icon={<i class="fa-solid fa-arrow-up-9-1"></i>}
+              icon={<i className="fa-solid fa-arrow-up-9-1"></i>}
               placeholder="Account Number"
             />
           </div>
@@ -37,7 +37,7 @@ export default function Accounts({}) {
           <div className="w-full flex justify-center items-center">
             <button className="flex gap-1 justify-center items-center py-3 px-6 rounded-md shadow-inner shadow-black bg-slate-900 zoom-in hover:shadow-md hover:shadow-black uppercase">
               <span>
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
               </span>
               <span>Add</span>
             </button>

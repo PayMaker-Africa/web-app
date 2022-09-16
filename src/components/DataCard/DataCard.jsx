@@ -1,6 +1,6 @@
 export default function DataCard({ title = "", text = "", icon = "" }) {
   return (
-    <div className="rounded-lg shadow-md shadow-black bg-slate-600 w-full p-3 px-6 h-fit flex justify-between gap-2 cursor-pointer zoom-in">
+    <div className="rounded-lg shadow-md shadow-black bg-slate-600 w-full p-3 px-6 h-fit flex gap-2 cursor-pointer hover:bg-black zoom-in hover:shadow-inner hover:shadow-stone-900">
       {/* Icon */}
       <div className="p-3 bg-sky-200 text-black rounded-lg shadow-xl flex items-center justify-center">
         {icon}

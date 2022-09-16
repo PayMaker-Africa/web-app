@@ -76,28 +76,28 @@ export const paymentCategories = [{
 ]
 
 export const users = [{
-    username: faker.name.findName().toLowerCase().replace(" ", ""),
+    username: faker.name.fullName().toLowerCase().replace(" ", ""),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
     image: ""
 },
 {
-    username: faker.name.findName().toLowerCase().replace(" ", ""),
+    username: faker.name.fullName().toLowerCase().replace(" ", ""),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
     image: ""
 },
 {
-    username: faker.name.findName().toLowerCase().replace(" ", ""),
+    username: faker.name.fullName().toLowerCase().replace(" ", ""),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
     image: ""
 },
 {
-    username: faker.name.findName().toLowerCase().replace(" ", ""),
+    username: faker.name.fullName().toLowerCase().replace(" ", ""),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),

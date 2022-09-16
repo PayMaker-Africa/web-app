@@ -9,7 +9,7 @@ import {
   ArcElement,
 } from "chart.js"
 import ChartDataLabels from "chartjs-plugin-datalabels"
-import { Bar, Pie } from "react-chartjs-2"
+import { Bar, Doughnut, Pie } from "react-chartjs-2"
 
 ChartJS.register(
   CategoryScale,
@@ -126,6 +126,8 @@ export default function RenderChart({
 }) {
   return type === "bar" ? (
     <Bar data={data} options={barChartOptions} />
+  ) : type === "doughnut" ? (
+    <Doughnut data={data} />
   ) : (
     <Pie
       data={data}

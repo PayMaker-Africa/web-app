@@ -1,15 +1,19 @@
 import ActionCard from "../../components/ActionCard/ActionCard"
+import CreateWallet from "../../components/CreateWallet/CreateWallet"
 import DataCard from "../../components/DataCard/DataCard"
 import RenderChart from "../../components/RenderChart/RenderChart"
+import TopUpWallet from "../../components/TopUpWallet/TopUpWallet"
 import TransactionsHistory from "../../components/TransactionsHistory/TransactionsHistory"
+import Transfer from "../../components/Transfer/Transfer"
+import Withdraw from "../../components/Withdraw/Withdraw"
 import { currency } from "../../constants/helper-functions"
 import "./Wallet.css"
 
 export default function Wallet() {
   return (
-    <div className="mx-3 mt-3 flex flex-col gap-4">
+    <div className="mx-3 mt-5 flex flex-col gap-4">
       {/* Wallets Balances */}
-      <div className="flex flex-wrap gap-4 justify-center xl:justify-between items-center flex-shrink-0">
+      <div className="flex flex-wrap gap-4 justify-around items-center flex-shrink-0 pb-6 border-b">
         {/* Main Wallet */}
         <div className="data-card">
           <DataCard
@@ -57,21 +61,21 @@ export default function Wallet() {
       </div>
 
       {/* Action Cards */}
-      <div className="flex flex-wrap xl:flex-nowrap justify-center xl:justify-start overflow-x-scroll items-center gap-4 2xl:gap-10 mt-10 snap-x scroll">
+      <div className="flex flex-wrap xl:flex-nowrap justify-around xl:justify-start overflow-x-scroll items-center gap-4 2xl:gap-10 mt-5 snap-x scroll">
         <div className="action-card-container">
-          <ActionCard title="Create Wallet" />
+          <ActionCard title="Create Wallet" content={<CreateWallet />} />
         </div>
 
         <div className="action-card-container">
-          <ActionCard title="Top Up Wallet" />
+          <ActionCard title="Top Up Wallet" content={<TopUpWallet />} />
         </div>
 
         <div className="action-card-container">
-          <ActionCard title="Withdraw" />
+          <ActionCard title="Withdraw" content={<Withdraw />} />
         </div>
 
         <div className="action-card-container">
-          <ActionCard title="Transfer" />
+          <ActionCard title="Transfer" content={<Transfer />} />
         </div>
       </div>
 
