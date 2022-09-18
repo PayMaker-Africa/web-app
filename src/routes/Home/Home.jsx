@@ -1,10 +1,14 @@
+import { useContext } from "react"
 import DataCard from "../../components/DataCard/DataCard"
 import RenderChart from "../../components/RenderChart/RenderChart"
 import TransactionsHistory from "../../components/TransactionsHistory/TransactionsHistory"
 import { currency } from "../../constants/helper-functions"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import "./Home.css"
 
 export default function Home() {
+  const { userInfo, businessInfo } = useContext(PayMakerAPIContext)
+  console.log(businessInfo)
   return (
     <>
       <div className="flex flex-wrap mt-3 mx-1">
@@ -25,7 +29,7 @@ export default function Home() {
             <div className="data-card">
               <DataCard
                 title="Wallet Balance"
-                text={currency(Math.ceil(Math.random() * 999999))}
+                text={currency(businessInfo.wallet_balance)}
                 icon={<i className="fa-solid fa-wallet"></i>}
               />
             </div>

@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export function currency(value) {
     return `₦ ${Number(value).toLocaleString()}`
 }
@@ -59,6 +61,25 @@ export function greeting() {
     }
     if (time == 12) {
         return "It's Mid-day"
+    }
+}
+
+export async function apiRequest(url, method = "get", data = {}, config = {}) {
+    const BASE_URL = "https://paymaker.io/api/"
+    const BEARER_TOKEN = localStorage.getItem("bearer-token")
+    try {
+        const request = await axios({
+            method: method,
+            url: BASE_URL + url,
+            data: data,
+            withCredentials: true,
+            headers: {
+                Authorization: `Bearer ${BEARER_TOKEN}`,
+            },
+        })
+        return request
+    } catch (err) {
+        return err
     }
 }
 

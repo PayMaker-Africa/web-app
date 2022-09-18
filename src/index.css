@@ -49,3 +49,16 @@ input:focus {
   /* @apply border-0 outline-none shadow-inner bg-slate-800 rounded-lg shadow-black w-full text-white; */
   @apply bg-transparent w-full;
 }
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}
