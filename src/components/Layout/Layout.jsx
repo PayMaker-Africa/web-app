@@ -110,7 +110,6 @@ export default function Layout({ children }) {
               <Route path="/qr" element={<QR />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/support" element={<Support />} />
-              <Route path="/logout" element={<Authentication />} />
             </Routes>
           </div>
         </div>

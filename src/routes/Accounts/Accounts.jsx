@@ -1,9 +1,79 @@
+import { useState } from "react"
+import { useContext } from "react"
 import AccountsCard from "../../components/AccountsCard/AccountsCard"
 import CustomInput from "../../components/CustomInput/CustomInput"
 import CustomSelect from "../../components/CustomSelect/CustomSelect"
-import { accounts } from "../../constants/demoData"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
+import { Nuban } from "../../constants/nubanValidator"
+import { useEffect } from "react"
+import Loader from "../../components/Loader/Loader"
+import { makeAPIRequest } from "../../constants/helper-functions"
 
 export default function Accounts({}) {
+  const { bankAccounts } = useContext(PayMakerAPIContext)
+  const [banks, setBanks] = useState(() => Nuban.allBanks())
+  const [bank, setBank] = useState(banks[0].name)
+  const [accountNumber, setAccountNumber] = useState("")
+  const [accountName, setAccountName] = useState("")
+
+  const [showStatus, setShowStatus] = useState(false)
+  const [statusCode, setStatusCode] = useState(0)
+  const [statusMessage, setStatusMessage] = useState(
+    "Account Number Must Be 10 Digits"
+  )
+
+  const [pageIsBusy, setPageIsBusy] = useState(false)
+
+  function handleAccountNumberChange(value) {
+    if (value.length < 11 && !isNaN(value)) {
+      setAccountNumber(value)
+    }
+  }
+
+  async function validateAccountDetails(bank, accountNumber) {
+    // Check Account Number && Bank Length/Syntax
+    if (
+      !accountNumber ||
+      accountNumber.length !== 10 ||
+      isNaN(accountNumber) ||
+      !Nuban.allBanks().some(
+        (currentBank) => currentBank.name.toUpperCase() === bank
+      )
+    ) {
+      return
+    }
+
+    if (!Nuban.possibleBanks(accountNumber).includes(bank)) {
+      setStatusCode(0)
+      setStatusMessage(`Account Number Does Not Exist For Selected Bank.`)
+      return
+    }
+
+    setPageIsBusy(true)
+    const accountDetailsRequest = await makeAPIRequest(
+      `nuban/${accountNumber}?bank_code=${Nuban.bankCode(bank)}`
+    )
+
+    if (accountDetailsRequest[0].account_name) {
+      setAccountName(accountDetailsRequest[0].account_name)
+      setStatusMessage(accountDetailsRequest[0].account_name)
+      setStatusCode(1)
+    } else {
+      setStatusMessage("Error Retrieving Account Name.")
+      setStatusCode(0)
+    }
+    setPageIsBusy(false)
+  }
+
+  useEffect(() => {
+    if (bank && accountNumber && accountNumber.length === 10) {
+      validateAccountDetails(bank, accountNumber)
+    } else {
+      setStatusCode(0)
+      setStatusMessage("Account Number Must Be 10 Digits")
+    }
+  }, [bank, accountNumber])
+
   return (
     <div className="flex flex-wrap border-red-500 h-full">
       {/* Add Account */}
@@ -15,14 +85,28 @@ export default function Accounts({}) {
           </div>
 
           {/* Status Message */}
-          <div className="flex justify-center bg-red-900 rounded-lg p-3 font-semibold">
-            Account Number Must Be 10 Digits
-          </div>
+          {pageIsBusy ? (
+            <span className="w-full flex justify-center items-center">
+              <Loader type={2} />
+            </span>
+          ) : (
+            <div
+              className={`flex justify-center text-xs ${
+                statusCode ? "bg-teal-600" : "bg-red-900"
+              } rounded-lg p-3 font-semibold ease-linear duration-300`}>
+              {statusMessage}
+            </div>
+          )}
 
           {/* Select Bank */}
           <CustomSelect
             icon={<i className="fa-solid fa-building-columns"></i>}
             title="Select Bank"
+            options={banks.map((bank) => bank.name)}
+            value={bank}
+            changeHandlerFunc={(value) => {
+              setBank(value)
+            }}
           />
 
           {/* Account Number */}
@@ -30,32 +114,42 @@ export default function Accounts({}) {
             <CustomInput
               icon={<i className="fa-solid fa-arrow-up-9-1"></i>}
               placeholder="Account Number"
+              type="number"
+              value={accountNumber}
+              handleValueChange={(value) => {
+                handleAccountNumberChange(value)
+              }}
             />
           </div>
 
           {/* Button */}
           <div className="w-full flex justify-center items-center">
-            <button className="flex gap-1 justify-center items-center py-3 px-6 rounded-md shadow-inner shadow-black bg-slate-900 zoom-in hover:shadow-md hover:shadow-black uppercase">
-              <span>
-                <i className="fa-solid fa-plus"></i>
-              </span>
-              <span>Add</span>
-            </button>
+            {pageIsBusy ? (
+              <Loader />
+            ) : (
+              <button className="flex gap-1 justify-center items-center py-3 px-6 rounded-md shadow-inner shadow-black bg-slate-900 zoom-in hover:shadow-md hover:shadow-black uppercase">
+                <span>
+                  <i className="fa-solid fa-building-columns"></i>
+                </span>
+                <span className="ml-2">Add Bank Account</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       {/* Manage Accounts */}
       <div className="w-full xl:w-1/2 bg-slate-900 shadow-inner shadow-black rounded-md p-3 flex flex-col gap-4 overflow-y-scroll h-full">
-        {accounts.map((account, index) => {
-          return (
-            <div
-              key={index}
-              className={`p-5 w-[85%] mx-auto ${index > 0 && "mt-5"}`}>
-              <AccountsCard account={account} />
-            </div>
-          )
-        })}
+        {bankAccounts &&
+          bankAccounts.map((account, index) => {
+            return (
+              <div
+                key={index}
+                className={`p-5 w-[85%] mx-auto ${index > 0 && "mt-5"}`}>
+                <AccountsCard account={account} />
+              </div>
+            )
+          })}
       </div>
     </div>
   )

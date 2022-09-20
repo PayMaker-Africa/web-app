@@ -1,7 +1,16 @@
+import { useContext } from "react"
+import { useState } from "react"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import CustomInput from "../CustomInput/CustomInput"
 import CustomSelect from "../CustomSelect/CustomSelect"
 
 export default function Withdraw() {
+  const { wallets, bankAccounts } = useContext(PayMakerAPIContext)
+
+  const [wallet, setWallet] = useState("")
+  const [amount, setAmount] = useState(0)
+  const [bankAccount, setBankAccount] = useState("")
+
   return (
     <>
       {/* Form */}
@@ -11,6 +20,18 @@ export default function Withdraw() {
           <CustomSelect
             title="Select Wallet"
             icon={<i className="fa-solid fa-wallet"></i>}
+            value={wallet}
+            changeHandlerFunc={setWallet}
+            options={
+              wallets
+                ? wallets.map((wallet) => {
+                    return {
+                      title: wallet.title,
+                      value: wallet.id,
+                    }
+                  })
+                : []
+            }
           />
         </div>
 
@@ -20,6 +41,8 @@ export default function Withdraw() {
             icon={<i className="fa-solid fa-money-bills"></i>}
             placeholder="Amount"
             type="number"
+            value={amount}
+            handleValueChange={setAmount}
           />
         </div>
 
@@ -28,6 +51,18 @@ export default function Withdraw() {
           <CustomSelect
             title="Destination Account"
             icon={<i className="fa-brands fa-account"></i>}
+            value={bankAccount}
+            changeHandlerFunc={setBankAccount}
+            options={
+              bankAccounts
+                ? bankAccounts.map((bankAccount) => {
+                    return {
+                      title: `${bankAccount.bank_name} - ${bankAccount.account_name}`,
+                      value: bankAccount.id,
+                    }
+                  })
+                : []
+            }
           />
         </div>
 

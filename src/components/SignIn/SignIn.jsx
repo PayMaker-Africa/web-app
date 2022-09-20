@@ -33,6 +33,7 @@ export default function SignIn() {
     // console.log(userInfoRequest)
 
     if (userInfoRequest && userInfoRequest.status === 200) {
+      localStorage.setItem("bearer-token", userInfoRequest.data.token)
       setStatusCode(1)
       setStatusMessage("Authentication Success... Preparing Your Dashboard...")
       setTimeout(() => {

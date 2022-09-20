@@ -1,8 +1,11 @@
 import { useState } from "react"
 import NavItem from "../NavItem/NavItem"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { AppContext } from "../../contexts/AppContext"
 
-export default function NavBar({ hidden }) {
+export default function NavBar({}) {
+  const { authenticated, setAuthenticated } = useContext(AppContext)
   const navbarSchema = [
     {
       title: "Wallet",
@@ -57,12 +60,6 @@ export default function NavBar({ hidden }) {
       icon: <i className="fa-solid fa-headset"></i>,
       color: "text-cyan-400",
     },
-
-    {
-      title: "Logout",
-      icon: <i className="fa-solid fa-power-off"></i>,
-      color: "text-red-500",
-    },
   ]
 
   const [activeNavItem, setActiveNavItem] = useState(0)
@@ -108,7 +105,7 @@ export default function NavBar({ hidden }) {
           </Link>
 
           {/* Nav Items */}
-          <div className="overflow-y-scroll">
+          <div className="overflow-y-scroll overflow-x-hidden">
             {navbarSchema.map((navItem, index) => {
               return (
                 <Link
@@ -125,6 +122,17 @@ export default function NavBar({ hidden }) {
                 </Link>
               )
             })}
+
+            {/* Logout */}
+            <NavItem
+              icon={<i className="fa-solid fa-power-off"></i>}
+              title={"Logout"}
+              onClickFunc={() => {
+                localStorage.removeItem("bearer-token")
+                setAuthenticated(false)
+              }}
+              color={"text-red-500"}
+            />
           </div>
 
           {/* Toggle Sidebar */}

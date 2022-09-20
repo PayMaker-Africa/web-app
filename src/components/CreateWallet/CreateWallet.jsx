@@ -1,7 +1,16 @@
+import { useContext, useState } from "react"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import CustomInput from "../CustomInput/CustomInput"
 import CustomSelect from "../CustomSelect/CustomSelect"
 
 export default function CreateWallet() {
+  const { walletTypes } = useContext(PayMakerAPIContext)
+
+  const [title, setTitle] = useState("")
+  const [openingBalance, setOpeningBalance] = useState(0)
+  const [type, setType] = useState("")
+  const [color, setColor] = useState("")
+
   return (
     <>
       {/* Form */}
@@ -11,6 +20,8 @@ export default function CreateWallet() {
           <CustomInput
             icon={<i className="fa-regular fa-id-badge text-xl"></i>}
             placeholder="Wallet Title"
+            value={title}
+            handleValueChange={setTitle}
           />
         </div>
 
@@ -20,6 +31,8 @@ export default function CreateWallet() {
             icon={<i className="fa-solid fa-money-bills"></i>}
             placeholder="Opening Balance"
             type="number"
+            value={openingBalance}
+            handleValueChange={setOpeningBalance}
           />
         </div>
 
@@ -28,6 +41,11 @@ export default function CreateWallet() {
           <CustomSelect
             title="Wallet Type"
             icon={<i className="fa-solid fa-wallet"></i>}
+            options={walletTypes.map((wallet) => {
+              return { title: wallet.title, value: wallet.id }
+            })}
+            value={type}
+            changeHandlerFunc={setType}
           />
         </div>
 
@@ -36,6 +54,9 @@ export default function CreateWallet() {
           <CustomInput
             icon={<i className="fa-solid fa-droplet"></i>}
             type="color"
+            placeholder="Wallet Color"
+            value={color}
+            handleValueChange={setColor}
           />
         </div>
 

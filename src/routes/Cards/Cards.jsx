@@ -1,16 +1,30 @@
+import { useContext } from "react"
+import { useState } from "react"
 import Actions from "../../components/Actions/Actions"
 import CreditCard from "../../components/CreditCard/CreditCard"
 import CustomInput from "../../components/CustomInput/CustomInput"
-import { cards } from "../../constants/demoData"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 
 export default function Cards() {
+  const { cards } = useContext(PayMakerAPIContext)
+
+  const [number, setNumber] = useState("")
+  const [cvv, setCVV] = useState("")
+  const [expiryDate, setExpiryDate] = useState("")
+
   return (
     <div className="flex flex-wrap border-red-500 h-full">
       {/* Add Card */}
       <div className="w-full h-full xl:w-1/2 shadow-inner flex flex-col items-center gap-10 overflow-scroll">
         {/* Card Preview */}
         <div className="h-[40%] w-full sm:w-3/4 md:w-2/3 flex justify-center items-center rounded-lg shadow-black mt-10 mx-1 sm:mx-3 md:mx-5">
-          <CreditCard card={cards[0]} />
+          <CreditCard
+            card={{
+              number,
+              cvv,
+              expiry_date: expiryDate,
+            }}
+          />
         </div>
 
         {/* Form */}
@@ -22,15 +36,28 @@ export default function Cards() {
             action=""
             className="w-full grow justify-between flex flex-col p-3">
             <div className="w-full mb-5">
-              <CustomInput placeholder="Card Number" />
+              <CustomInput
+                placeholder="Card Number"
+                value={number}
+                handleValueChange={setNumber}
+                autoFocus
+              />
             </div>
 
             <div className="w-full mb-5">
-              <CustomInput placeholder="CVV" />
+              <CustomInput
+                placeholder="CVV"
+                value={cvv}
+                handleValueChange={setCVV}
+              />
             </div>
 
             <div className="w-full mb-5">
-              <CustomInput placeholder="Expiry Date" />
+              <CustomInput
+                placeholder="Expiry Date"
+                value={expiryDate}
+                handleValueChange={setExpiryDate}
+              />
             </div>
 
             <div className="w-full mb-10 flex justify-center items-center">
@@ -48,20 +75,21 @@ export default function Cards() {
       {/* Manage Cards */}
       <div className="w-full xl:w-1/2 bg-slate-900 shadow-inner shadow-black rounded-md flex flex-col items-center gap-4 overflow-y-scroll h-full">
         <div className="h-full overflow-y-scroll p-3 w-full">
-          {cards.map((card, index) => {
-            return (
-              <div
-                key={index}
-                className={`flex flex-col gap-2 overflow-hidden w-full md:w-3/4 mx-auto ${
-                  index > 0 && "mt-10"
-                }`}>
-                <CreditCard card={card} />
+          {cards &&
+            cards.map((card, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`flex flex-col gap-4 h-72 md:h-[22rem] overflow-hidden w-full md:w-3/4 mx-auto ${
+                    index > 0 && "mt-10"
+                  }`}>
+                  <CreditCard card={card} />
 
-                {/* Actions */}
-                <Actions />
-              </div>
-            )
-          })}
+                  {/* Actions */}
+                  <Actions />
+                </div>
+              )
+            })}
         </div>
       </div>
     </div>

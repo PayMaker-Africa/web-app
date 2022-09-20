@@ -1,7 +1,18 @@
+import { useState } from "react"
+import { useContext } from "react"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import CustomInput from "../CustomInput/CustomInput"
 import CustomSelect from "../CustomSelect/CustomSelect"
 
 export default function Transfer() {
+  const { wallets } = useContext(PayMakerAPIContext)
+
+  const [source, setSource] = useState("")
+  const [transferTo, setTransferTo] = useState("")
+  const [destination, setDestination] = useState("")
+  const [recipient, setRecipient] = useState("")
+  const [amount, setAmount] = useState("")
+
   return (
     <>
       {/* Form */}
@@ -11,24 +22,69 @@ export default function Transfer() {
           <CustomSelect
             title="Transfer From"
             icon={<i className="fa-solid fa-wallet"></i>}
+            value={source}
+            changeHandlerFunc={setSource}
+            options={
+              wallets
+                ? wallets
+                    .filter((wallet) => wallet.id !== recipient)
+                    .map((wallet) => {
+                      return {
+                        title: wallet.title,
+                        value: wallet.id,
+                      }
+                    })
+                : []
+            }
           />
         </div>
 
-        {/* Destination */}
+        {/* Transfer To */}
         <div>
           <CustomSelect
             title="Transfer To"
             icon={<i className="fa-solid fa-wallet"></i>}
+            value={transferTo}
+            changeHandlerFunc={setTransferTo}
+            options={["Between My Wallets", "External Wallet"]}
           />
         </div>
 
-        {/* Sub Source */}
-        <div>
-          <CustomSelect
-            title="Account"
-            icon={<i className="fa-solid fa-user"></i>}
-          />
-        </div>
+        {/* Destination - Between My Wallets */}
+        {transferTo === "Between My Wallets" && (
+          <div>
+            <CustomSelect
+              title="Destination Wallet"
+              icon={<i className="fa-solid fa-user"></i>}
+              options={
+                wallets
+                  ? wallets
+                      .filter((wallet) => wallet.id !== source)
+                      .map((wallet) => {
+                        return {
+                          title: wallet.title,
+                          value: wallet.id,
+                        }
+                      })
+                  : []
+              }
+              value={destination}
+              changeHandlerFunc={setDestination}
+            />
+          </div>
+        )}
+
+        {/* Recipient - External Wallet */}
+        {transferTo === "External Wallet" && (
+          <div className="h-14">
+            <CustomInput
+              icon={<i className="fa-solid fa-money-bills"></i>}
+              placeholder="Recipient Wallet"
+              value={recipient}
+              handleValueChange={setRecipient}
+            />
+          </div>
+        )}
 
         {/* Amount */}
         <div className="h-14">
@@ -36,6 +92,8 @@ export default function Transfer() {
             icon={<i className="fa-solid fa-money-bills"></i>}
             placeholder="Amount"
             type="number"
+            value={amount}
+            handleValueChange={setAmount}
           />
         </div>
 

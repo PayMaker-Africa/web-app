@@ -4,93 +4,114 @@ const BANK_CODE_LENGTH = 3
 
 const NUBAN_KEY = "373373373373"
 
-const banks = [
+const allBanks = [
     {
-        name: "ACCESS BANK",
+        name: "Access Bank Plc",
         code: "044"
     },
+
     {
-        name: "CITIBANK",
+        name: "Citibank Nigeria Limited",
         code: "023"
     },
+
     {
-        name: "DIAMOND BANK",
+        name: "Diamond Bank",
         code: "063"
     },
+
     {
-        name: "ECOBANK NIGERIA",
+        name: "Ecobank Nigeria Plc",
         code: "050"
     },
+
     {
-        name: "FIDELITY BANK",
+        name: "Fidelity Bank Plc",
         code: "070"
     },
+
     {
-        name: "FIRST BANK OF NIGERIA",
+        name: "First Bank Nigeria Ltd",
         code: "011"
     },
+
     {
-        name: "FIRST CITY MONUMENT BANK",
+        name: "First City Monument Bank Plc",
         code: "214"
     },
+
     {
-        name: "GUARANTY TRUST BANK",
+        name: "Guaranty Trust Bank Plc",
         code: "058"
     },
+
     {
-        name: "HERITAGE BANK",
+        name: "Heritage Banking Company Ltd",
         code: "030"
     },
+
     {
-        name: "JAIZ BANK",
+        name: "Jaiz Bank",
         code: "301"
     },
+
     {
-        name: "KEYSTONE BANK",
+        name: "Keystone Bank",
         code: "082"
     },
+
     {
-        name: "PROVIDUS BANK",
+        name: "Providus Bank",
         code: "101"
     },
+
     {
-        name: "SKYE BANK",
+        name: "Polaris Bank",
         code: "076"
     },
+
     {
-        name: "STANBIC IBTC BANK",
+        name: "Stanbic Ibtc Bank Ltd",
         code: "221"
     },
+
     {
-        name: "STANDARD CHARTERED BANK",
+        name: "Standard Chartered Bank Nigeria Ltd",
         code: "068"
     },
+
     {
-        name: "STERLING BANK",
+        name: "Sterling Bank Plc",
         code: "232"
     },
+
     {
         name: "SUNTRUST",
         code: "100"
     },
+
     {
-        name: "UNION BANK OF NIGERIA",
+        name: "Union Bank Of Nigeria Plc",
         code: "032"
     },
+
     {
-        name: "UNITED BANK FOR AFRICA",
+        name: "United Bank For Africa Plc",
         code: "033"
     },
+
     {
-        name: "UNITY BANK",
+        name: "Unity Bank Plc",
         code: "215"
     },
+
     {
-        name: "WEMA BANK",
+        name: "Wema Bank Plc",
         code: "035"
     },
+
     {
-        name: "ZENITH BANK",
+        name: "Zenith Bank Plc",
         code: "057"
     }
 ]

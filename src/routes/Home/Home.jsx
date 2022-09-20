@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import DataCard from "../../components/DataCard/DataCard"
+import Loader from "../../components/Loader/Loader"
 import RenderChart from "../../components/RenderChart/RenderChart"
 import TransactionsHistory from "../../components/TransactionsHistory/TransactionsHistory"
 import { currency } from "../../constants/helper-functions"
@@ -7,8 +8,15 @@ import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import "./Home.css"
 
 export default function Home() {
-  const { userInfo, businessInfo } = useContext(PayMakerAPIContext)
-  console.log(businessInfo)
+  const {
+    businessInfo,
+    bankAccounts,
+    paymentCategories,
+    businessUsers,
+    todayTransactions,
+    thisMonthTransactions,
+  } = useContext(PayMakerAPIContext)
+
   return (
     <>
       <div className="flex flex-wrap mt-3 mx-1">
@@ -20,7 +28,7 @@ export default function Home() {
             <div className="data-card">
               <DataCard
                 title="Bank Accounts"
-                text={3}
+                text={bankAccounts ? bankAccounts.length : <Loader type={2} />}
                 icon={<i className="fa-solid fa-building-columns"></i>}
               />
             </div>
@@ -29,7 +37,13 @@ export default function Home() {
             <div className="data-card">
               <DataCard
                 title="Wallet Balance"
-                text={currency(businessInfo.wallet_balance)}
+                text={
+                  businessInfo.wallet_balance ? (
+                    currency(businessInfo.wallet_balance)
+                  ) : (
+                    <Loader type={2} />
+                  )
+                }
                 icon={<i className="fa-solid fa-wallet"></i>}
               />
             </div>
@@ -38,7 +52,13 @@ export default function Home() {
             <div className="data-card">
               <DataCard
                 title="Payment Categories"
-                text={Math.ceil(Math.random() * 15)}
+                text={
+                  paymentCategories ? (
+                    paymentCategories.length
+                  ) : (
+                    <Loader type={2} />
+                  )
+                }
                 icon={<i className="fa-solid fa-wallet"></i>}
               />
             </div>
@@ -47,7 +67,17 @@ export default function Home() {
             <div className="data-card">
               <DataCard
                 title="Total Transactions - Today"
-                text={currency(Math.ceil(Math.random() * 999999))}
+                text={
+                  todayTransactions ? (
+                    currency(
+                      todayTransactions.reduce((acc, next) => {
+                        return parseFloat(acc) + parseFloat(next.amount)
+                      }, 0)
+                    )
+                  ) : (
+                    <Loader type={2} />
+                  )
+                }
                 icon={<i className="fa-solid fa-credit-card"></i>}
               />
             </div>
@@ -61,7 +91,17 @@ export default function Home() {
                     month: "long",
                   }
                 ).format(new Date())}`}
-                text={currency(Math.ceil(Math.random() * 99999999))}
+                text={
+                  thisMonthTransactions ? (
+                    currency(
+                      thisMonthTransactions.reduce((acc, next) => {
+                        return parseFloat(acc) + parseFloat(next.amount)
+                      }, 0)
+                    )
+                  ) : (
+                    <Loader type={2} />
+                  )
+                }
                 icon={<i className="fa-solid fa-money-check"></i>}
               />
             </div>
@@ -70,7 +110,9 @@ export default function Home() {
             <div className="data-card w-1/6 xl:w-[15%]">
               <DataCard
                 title="Users"
-                text={Math.ceil(Math.random() * 10)}
+                text={
+                  businessUsers ? businessUsers.length : <Loader type={2} />
+                }
                 icon={<i className="fa-solid fa-users"></i>}
               />
             </div>

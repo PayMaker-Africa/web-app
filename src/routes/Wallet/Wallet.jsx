@@ -1,15 +1,19 @@
+import { useContext } from "react"
 import ActionCard from "../../components/ActionCard/ActionCard"
 import CreateWallet from "../../components/CreateWallet/CreateWallet"
 import DataCard from "../../components/DataCard/DataCard"
+import Loader from "../../components/Loader/Loader"
 import RenderChart from "../../components/RenderChart/RenderChart"
 import TopUpWallet from "../../components/TopUpWallet/TopUpWallet"
 import TransactionsHistory from "../../components/TransactionsHistory/TransactionsHistory"
 import Transfer from "../../components/Transfer/Transfer"
 import Withdraw from "../../components/Withdraw/Withdraw"
 import { currency } from "../../constants/helper-functions"
+import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import "./Wallet.css"
 
 export default function Wallet() {
+  const { businessInfo, wallets } = useContext(PayMakerAPIContext)
   return (
     <div className="mx-3 mt-5 flex flex-col gap-4">
       {/* Wallets Balances */}
@@ -18,46 +22,27 @@ export default function Wallet() {
         <div className="data-card">
           <DataCard
             title="Main Wallet"
-            text={currency(Math.ceil(Math.random() * 999999))}
+            text={
+              businessInfo.wallet_balance ? (
+                currency(businessInfo.wallet_balance)
+              ) : (
+                <Loader type={2} />
+              )
+            }
             icon={<i className="fa-solid fa-wallet"></i>}
           />
         </div>
 
-        {/* Tithes Wallet */}
-        <div className="data-card">
-          <DataCard
-            title="Tithes Wallet"
-            text={currency(Math.ceil(Math.random() * 999999))}
-            icon={<i className="fa-solid fa-wallet"></i>}
-          />
-        </div>
-
-        {/* Offering Wallet */}
-        <div className="data-card">
-          <DataCard
-            title="Offerings Wallet"
-            text={currency(Math.ceil(Math.random() * 999999))}
-            icon={<i className="fa-solid fa-wallet"></i>}
-          />
-        </div>
-
-        {/* Seeds Wallet */}
-        <div className="data-card">
-          <DataCard
-            title="Seeds Wallet"
-            text={currency(Math.ceil(Math.random() * 999999))}
-            icon={<i className="fa-solid fa-wallet"></i>}
-          />
-        </div>
-
-        {/* Building Wallet */}
-        <div className="data-card">
-          <DataCard
-            title="Building Wallet"
-            text={currency(Math.ceil(Math.random() * 999999))}
-            icon={<i className="fa-solid fa-wallet"></i>}
-          />
-        </div>
+        {wallets &&
+          wallets.map((wallet) => (
+            <div key={wallet.id} className="data-card">
+              <DataCard
+                title={wallet.title}
+                text={currency(wallet.balance)}
+                icon={<i className="fa-solid fa-wallet"></i>}
+              />
+            </div>
+          ))}
       </div>
 
       {/* Action Cards */}

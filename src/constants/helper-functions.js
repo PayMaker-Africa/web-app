@@ -1,11 +1,27 @@
 import axios from "axios"
 
+export // API Call & States Update Function
+    async function makeAPIRequest(
+        url,
+        stateHandlerFunc = () => { },
+        method = "get",
+        data = {}
+    ) {
+    const request = await apiRequest(url)
+    if (request.data) {
+        stateHandlerFunc(request.data)
+        return request.data
+    }
+    return false
+}
+
 export function currency(value) {
     return `₦ ${Number(value).toLocaleString()}`
 }
 
 export function generateRandomNumber(min, max) {
-    return Math.floor(Math.random() * max) + min
+    return Math.random() * (max - min) + min;
+
 }
 
 export function generateRandomColor() {
@@ -82,6 +98,66 @@ export async function apiRequest(url, method = "get", data = {}, config = {}) {
         return err
     }
 }
+
+export function formatCardNumber(number) {
+    const parsedNumber = String(number)
+    let output = ""
+    for (let i = 0; i < parsedNumber.length; i++) {
+        output += i % 5 === 0 ? " " : parsedNumber[i]
+    }
+    return output
+}
+
+export function obfuscateCardNumber(number) {
+    const parsedNumber = String(number)
+    let output = "";
+    for (let i = 0; i < parsedNumber.length; i++) {
+        if (i < parsedNumber.length - 4) {
+            output += "*"
+        } else {
+            output += parsedNumber[i];
+        }
+    }
+    return output
+}
+
+export function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
+}
+
+export function findInArr(key, value, arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][key] === value) {
+            return i
+        }
+    }
+    return -1
+}
+
+export function getDataFromArr(arr, key, value) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][key] === value) {
+            return arr[i]
+        }
+    }
+    return false
+}
+
+export const bankLogosRequiringWhiteBg = ["First Bank Nigeria Ltd"]
 
 
 // export function filterData(data) {
