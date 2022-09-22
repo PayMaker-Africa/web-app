@@ -87,7 +87,7 @@ export default function NavBar({}) {
             : "hidden lg:flex"
         }`}>
         {/* Mini NavBar */}
-        <div className="flex flex-col gap-4 bg-slate-900 items-center overflow-scroll justify-between h-full flex-shrink-0">
+        <div className="flex flex-col gap-4 bg-slate-900 items-center justify-between h-full flex-shrink-0">
           {/* Home */}
           <Link to={`/`} className="w-full">
             <NavItem
@@ -105,7 +105,7 @@ export default function NavBar({}) {
           </Link>
 
           {/* Nav Items */}
-          <div className="overflow-y-scroll overflow-x-hidden">
+          <div className="overflow-y-auto overflow-x-hidden">
             {navbarSchema.map((navItem, index) => {
               return (
                 <Link

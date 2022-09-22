@@ -94,7 +94,9 @@ export default function TopUpWallet() {
 
         {/* Button */}
         <div className="w-full flex justify-center items-center p-3">
-          <button className="py-3 bg-slate-800 px-6 rounded-lg shadow-inner shadow-black zoom-in cursor-pointer hover:shadow-lg hover:shadow-black uppercase flex justify-center items-center">
+          <button
+            disabled
+            className="py-3 bg-slate-800 px-6 rounded-lg shadow-inner shadow-black zoom-in cursor-pointer hover:shadow-lg hover:shadow-black uppercase flex justify-center items-center">
             <span>
               <i className="fa-solid fa-wallet"></i>
             </span>

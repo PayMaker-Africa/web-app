@@ -234,7 +234,7 @@ export default function Analytics() {
         `${
           getDataFromArr(paymentCategories, "id", transaction?.category)
             .title || "No Category"
-        } - ${currency(transaction?.amount)}`
+        } - ${currency(transaction?.amount || 0)}`
       ) : (
         <Loader type={2} />
       )
@@ -248,7 +248,7 @@ export default function Analytics() {
         `${
           getDataFromArr(paymentCategories, "id", transaction?.category)
             .title || "No Category"
-        } - ${currency(transaction?.amount)}`
+        } - ${currency(transaction?.amount || 0)}`
       ) : (
         <Loader type={2} />
       )
@@ -264,7 +264,7 @@ export default function Analytics() {
         `${
           getDataFromArr(paymentCategories, "id", transaction?.category)
             .title || "No Category"
-        } - ${currency(transaction?.amount)}`
+        } - ${currency(transaction?.amount || 0)}`
       ) : (
         <Loader type={2} />
       )
@@ -281,7 +281,7 @@ export default function Analytics() {
         `${
           getDataFromArr(paymentCategories, "id", transaction?.category)
             .title || "No Category"
-        } - ${currency(transaction?.amount)}`
+        } - ${currency(transaction?.amount || 0)}`
       ) : (
         <Loader type={2} />
       )
@@ -297,7 +297,7 @@ export default function Analytics() {
         `${
           getDataFromArr(paymentCategories, "id", transaction?.category)
             .title || "No Category"
-        } - ${currency(transaction?.amount)}`
+        } - ${currency(transaction?.amount || 0)}`
       ) : (
         <Loader type={2} />
       )
@@ -309,7 +309,9 @@ export default function Analytics() {
     if (countedTransactionsToday && paymentCategories) {
       setMostTransactedCategoryToday(() => {
         const categoryInfo = getMostTransactedCategory(countedTransactionsToday)
-        return `${categoryInfo.title} - ${categoryInfo.count}`
+        return `${categoryInfo.title || "No Category"} - ${
+          categoryInfo.count || 0
+        }`
       })
     }
   }, [countedTransactionsToday, paymentCategories])

@@ -1,12 +1,12 @@
 import axios from "axios"
 
-export // API Call & States Update Function
-    async function makeAPIRequest(
-        url,
-        stateHandlerFunc = () => { },
-        method = "get",
-        data = {}
-    ) {
+// API Call & States Update Function
+export async function makeAPIRequest(
+    url,
+    stateHandlerFunc = () => { },
+    method = "get",
+    data = {}
+) {
     const request = await apiRequest(url)
     if (request.data) {
         stateHandlerFunc(request.data)
@@ -100,10 +100,16 @@ export async function apiRequest(url, method = "get", data = {}, config = {}) {
 }
 
 export function formatCardNumber(number) {
-    const parsedNumber = String(number)
-    let output = ""
-    for (let i = 0; i < parsedNumber.length; i++) {
-        output += i % 5 === 0 ? " " : parsedNumber[i]
+    const parsedNumber = String(number).replaceAll(" ", "")
+    let output = parsedNumber[0]
+
+    for (let i = 1; i < parsedNumber.length; i++) {
+        if ((i + 1) % 4 === 0) {
+            output += parsedNumber[i] + " "
+        } else {
+            output += parsedNumber[i]
+        }
+
     }
     return output
 }

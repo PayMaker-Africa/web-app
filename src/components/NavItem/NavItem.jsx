@@ -13,7 +13,7 @@ export default function NavItem({
       onClick={onClickFunc}>
       {/* Icon */}
       <span
-        className={`text-sm lg:text-lg rounded-lg items-center justify-center flex ${color}`}>
+        className={`text-sm lg:text-base rounded-lg items-center justify-center flex ${color}`}>
         {icon}
       </span>
 

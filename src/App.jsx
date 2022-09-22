@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react"
 import { useEffect, useState } from "react"
 import Layout from "./components/Layout/Layout"
 import Loader from "./components/Loader/Loader"
+import Toast from "./components/Toast/Toast"
 import { apiRequest, makeAPIRequest } from "./constants/helper-functions"
 import { AppContext } from "./contexts/AppContext"
 import { PayMakerAPIContext } from "./contexts/PayMakerAPIContext"
@@ -110,6 +111,7 @@ export default function App() {
 
   const [darkTheme, setDarkTheme] = useState(true)
   const [tabs, setTabs] = useState([])
+  const [toastOptions, setToastOptions] = useState({ visible: false })
 
   useEffect(() => {
     async function invokeAPICalls() {
@@ -150,6 +152,8 @@ export default function App() {
           darkTheme,
           setDarkTheme,
           tabs,
+          toastOptions,
+          setToastOptions,
         }}>
         <PayMakerAPIContext.Provider
           value={{
@@ -185,7 +189,13 @@ export default function App() {
 
             // Miscs
           }}>
-          {authenticated ? <Layout /> : <Authentication />}
+          {authenticated ? (
+            <Layout>
+              <Toast options={toastOptions} />
+            </Layout>
+          ) : (
+            <Authentication />
+          )}
         </PayMakerAPIContext.Provider>
       </AppContext.Provider>
     </>

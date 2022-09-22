@@ -7,10 +7,12 @@ import { PayMakerAPIContext } from "../../contexts/PayMakerAPIContext"
 import { Nuban } from "../../constants/nubanValidator"
 import { useEffect } from "react"
 import Loader from "../../components/Loader/Loader"
-import { makeAPIRequest } from "../../constants/helper-functions"
+import { apiRequest, makeAPIRequest } from "../../constants/helper-functions"
+import { AppContext } from "../../contexts/AppContext"
 
 export default function Accounts({}) {
-  const { bankAccounts } = useContext(PayMakerAPIContext)
+  const { toastOptions, setToastOptions } = useContext(AppContext)
+  const { bankAccounts, getBankAccounts } = useContext(PayMakerAPIContext)
   const [banks, setBanks] = useState(() => Nuban.allBanks())
   const [bank, setBank] = useState(banks[0].name)
   const [accountNumber, setAccountNumber] = useState("")
@@ -37,7 +39,7 @@ export default function Accounts({}) {
       accountNumber.length !== 10 ||
       isNaN(accountNumber) ||
       !Nuban.allBanks().some(
-        (currentBank) => currentBank.name.toUpperCase() === bank
+        (currentBank) => currentBank.name.toUpperCase() === bank.toUpperCase()
       )
     ) {
       return
@@ -65,11 +67,71 @@ export default function Accounts({}) {
     setPageIsBusy(false)
   }
 
+  async function addAccount(e) {
+    e.preventDefault()
+    if (
+      !accountName ||
+      accountNumber.length !== 10 ||
+      isNaN(accountNumber) ||
+      !bank ||
+      !bank.length
+    ) {
+      return
+    }
+
+    const formData = {
+      bank_name: bank,
+      account_number: accountNumber,
+      account_name: accountName,
+    }
+
+    setPageIsBusy(true)
+
+    const addAccountRequest = await apiRequest(
+      "business/bank-accounts/add",
+      "post",
+      formData
+    )
+
+    const parsedToastOptions = {
+      visible: true,
+      lifespan: 5,
+      visibilityHandlerFunc: () => {
+        setToastOptions({ ...toastOptions, visible: false })
+      },
+    }
+
+    if (addAccountRequest.status === 201) {
+      setStatusCode(1)
+      setStatusMessage("Account Added Successfully.")
+      getBankAccounts()
+      parsedToastOptions.message = "Account Added Successfully."
+    } else {
+      setStatusCode(0)
+      setStatusMessage("An Error Occured! Account Not Added.")
+      parsedToastOptions.message = "An Error Occured! Account Not Added."
+      parsedToastOptions.mode = 2
+    }
+
+    setToastOptions(parsedToastOptions)
+    setPageIsBusy(false)
+
+    setTimeout(() => {
+      setStatusMessage("Account Number Must Be 10 Digits.")
+      setAccountName("")
+      setAccountNumber("")
+      setBank(banks[0].name)
+    }, 3000)
+
+    // console.log(addAccountRequest)
+  }
+
   useEffect(() => {
     if (bank && accountNumber && accountNumber.length === 10) {
       validateAccountDetails(bank, accountNumber)
     } else {
       setStatusCode(0)
+      setPageIsBusy(false)
       setStatusMessage("Account Number Must Be 10 Digits")
     }
   }, [bank, accountNumber])
@@ -77,69 +139,72 @@ export default function Accounts({}) {
   return (
     <div className="flex flex-wrap border-red-500 h-full">
       {/* Add Account */}
+
       <div className="w-full xl:w-1/2 shadow-inner flex justify-center items-center mb-10">
-        <div className="bg-slate-500 p-5 h-96 w-96 mt-10 rounded-lg shadow-md shadow-black flex flex-col gap-8">
-          {/* Title */}
-          <div className="flex justify-center items-center uppercase underline underline-offset-4 font-sen font-bold text-lg ">
-            Add New Account
-          </div>
-
-          {/* Status Message */}
-          {pageIsBusy ? (
-            <span className="w-full flex justify-center items-center">
-              <Loader type={2} />
-            </span>
-          ) : (
-            <div
-              className={`flex justify-center text-xs ${
-                statusCode ? "bg-teal-600" : "bg-red-900"
-              } rounded-lg p-3 font-semibold ease-linear duration-300`}>
-              {statusMessage}
+        <form className="" onSubmit={(e) => addAccount(e)}>
+          <div className="bg-slate-500 p-5 h-96 w-96 mt-10 rounded-lg shadow-md shadow-black flex flex-col gap-8">
+            {/* Title */}
+            <div className="flex justify-center items-center uppercase underline underline-offset-4 font-sen font-bold text-lg ">
+              Add New Account
             </div>
-          )}
 
-          {/* Select Bank */}
-          <CustomSelect
-            icon={<i className="fa-solid fa-building-columns"></i>}
-            title="Select Bank"
-            options={banks.map((bank) => bank.name)}
-            value={bank}
-            changeHandlerFunc={(value) => {
-              setBank(value)
-            }}
-          />
+            {/* Status Message */}
+            {pageIsBusy ? (
+              <span className="w-full flex justify-center items-center">
+                <Loader type={2} />
+              </span>
+            ) : (
+              <div
+                className={`flex justify-center text-xs ${
+                  statusCode ? "bg-teal-600" : "bg-red-900"
+                } rounded-lg p-3 font-semibold ease-linear duration-300`}>
+                {statusMessage}
+              </div>
+            )}
 
-          {/* Account Number */}
-          <div className="h-14">
-            <CustomInput
-              icon={<i className="fa-solid fa-arrow-up-9-1"></i>}
-              placeholder="Account Number"
-              type="number"
-              value={accountNumber}
-              handleValueChange={(value) => {
-                handleAccountNumberChange(value)
+            {/* Select Bank */}
+            <CustomSelect
+              icon={<i className="fa-solid fa-building-columns"></i>}
+              title="Select Bank"
+              options={banks.map((bank) => bank.name)}
+              value={bank}
+              changeHandlerFunc={(value) => {
+                setBank(value)
               }}
             />
-          </div>
 
-          {/* Button */}
-          <div className="w-full flex justify-center items-center">
-            {pageIsBusy ? (
-              <Loader />
-            ) : (
-              <button className="flex gap-1 justify-center items-center py-3 px-6 rounded-md shadow-inner shadow-black bg-slate-900 zoom-in hover:shadow-md hover:shadow-black uppercase">
-                <span>
-                  <i className="fa-solid fa-building-columns"></i>
-                </span>
-                <span className="ml-2">Add Bank Account</span>
-              </button>
-            )}
+            {/* Account Number */}
+            <div className="h-14">
+              <CustomInput
+                icon={<i className="fa-solid fa-arrow-up-9-1"></i>}
+                placeholder="Account Number"
+                type="number"
+                value={accountNumber}
+                handleValueChange={(value) => {
+                  handleAccountNumberChange(value)
+                }}
+              />
+            </div>
+
+            {/* Button */}
+            <div className="w-full flex justify-center items-center">
+              {pageIsBusy ? (
+                <Loader />
+              ) : (
+                <button className="flex gap-1 justify-center items-center py-3 px-6 rounded-md shadow-inner shadow-black bg-slate-900 zoom-in hover:shadow-md hover:shadow-black uppercase">
+                  <span>
+                    <i className="fa-solid fa-building-columns"></i>
+                  </span>
+                  <span className="ml-2">Add Bank Account</span>
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Manage Accounts */}
-      <div className="w-full xl:w-1/2 bg-slate-900 shadow-inner shadow-black rounded-md p-3 flex flex-col gap-4 overflow-y-scroll h-full">
+      <div className="w-full xl:w-1/2 bg-slate-900 shadow-inner shadow-black rounded-md p-3 flex flex-col gap-4 overflow-y-auto h-full">
         {bankAccounts &&
           bankAccounts.map((account, index) => {
             return (

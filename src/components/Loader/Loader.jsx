@@ -33,4 +33,12 @@ export default function Loader({ type = 1 }) {
       </div>
     )
   }
+
+  if (type === 3) {
+    return (
+      <div className="wrap">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
 }

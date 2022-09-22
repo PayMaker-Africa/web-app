@@ -76,9 +76,7 @@ export default function SignIn() {
               placeholder="PayMaker ID | Phone | Email"
               icon={<i className="fa-solid fa-mobile"></i>}
               value={authID}
-              handleValueChange={(e) => {
-                setAuthID(() => e.target.value)
-              }}
+              handleValueChange={setAuthID}
               autoComplete="new-password"
               required
               autoFocus
@@ -91,9 +89,7 @@ export default function SignIn() {
               placeholder="Username"
               icon={<i className="fa-solid fa-user-tie"></i>}
               value={username}
-              handleValueChange={(e) => {
-                setUsername(() => e.target.value)
-              }}
+              handleValueChange={setUsername}
               autoComplete="new-password"
               required
             />
@@ -106,9 +102,7 @@ export default function SignIn() {
               icon={<i className="fa-solid fa-key"></i>}
               type="password"
               value={password}
-              handleValueChange={(e) => {
-                setPassword(() => e.target.value)
-              }}
+              handleValueChange={setPassword}
               autoComplete="new-password"
               required
             />

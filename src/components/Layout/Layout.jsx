@@ -18,10 +18,12 @@ import Authentication from "../../routes/Authentication/Authentication"
 export default function Layout({ children }) {
   const { darkTheme, setDarkTheme, tabs, authenticated } =
     useContext(AppContext)
-  const [pageContents, setPageContents] = useState("Home")
+  // const [pageContents, setPageContents] = useState("Home")
 
   return (
-    <div className="h-full flex font-sen">
+    <div className="h-full flex font-sen border relative">
+      {children}
+
       {/* NavBar */}
       {<NavBar />}
 
@@ -31,15 +33,15 @@ export default function Layout({ children }) {
           {/* Header */}
           <div className="dark:bg-slate-900 rounded-tl-lg mt-4 flex justify-between items-center">
             {/* Tabs */}
-            <div className="flex gap-2 cursor-pointer items-end self-end w-3/4 overflow-scroll flex-nowrap">
-              <Tab
+            <div className="flex gap-2 cursor-pointer items-end self-end w-3/4 overflow-x-auto flex-nowrap">
+              {/* <Tab
                 icon={<i className="fa-solid fa-house text-2xs"></i>}
                 header="Home"
               />
               <Tab
                 icon={<i className="fa-solid fa-house text-2xs"></i>}
                 header="Wallet"
-              />
+              /> */}
             </div>
 
             {/* Utilities */}
@@ -97,7 +99,7 @@ export default function Layout({ children }) {
           </div>
 
           {/* Main Contents */}
-          <div className="dark:bg-slate-800 flex-1 h-full max-h-full overflow-y-scroll">
+          <div className="dark:bg-slate-800 flex-1 h-full max-h-full overflow-y-auto">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/authentication" element={<Authentication />} />

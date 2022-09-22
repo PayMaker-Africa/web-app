@@ -9,6 +9,7 @@ export default function CustomInput({
   handleValueChange = () => {},
   required = false,
   autoFocus = false,
+  readOnly = false,
 }) {
   // const [inputValue, setInputValue] = useState()
 
@@ -26,6 +27,7 @@ export default function CustomInput({
           className="cursor-pointer"
           onChange={(e) => handleValueChange(e.target.value.toUpperCase())}
           ref={colorPicker}
+          readOnly={readOnly}
         />
       </div>
 
@@ -48,6 +50,7 @@ export default function CustomInput({
           onChange={(e) => handleValueChange(e.target.value)}
           required={required}
           autoFocus={autoFocus}
+          readOnly={readOnly}
         />
       </span>
     </div>
