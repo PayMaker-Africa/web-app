@@ -63,7 +63,7 @@ export default function NavBar({}) {
   ]
 
   const [activeNavItem, setActiveNavItem] = useState(0)
-  const [navBarShown, setNavBarShown] = useState(true)
+  const [navBarShown, setNavBarShown] = useState(false)
   // const [hideAll, setHideAll] = useState(false)
 
   return (
@@ -116,7 +116,10 @@ export default function NavBar({}) {
                     icon={navItem.icon}
                     title={navItem.title}
                     isActive={activeNavItem > 0 && index === activeNavItem - 1}
-                    onClickFunc={() => setActiveNavItem(() => index + 1)}
+                    onClickFunc={() => {
+                      // localStorage.setItem("active-nav-item")
+                      setActiveNavItem(() => index + 1)
+                    }}
                     color={navItem.color}
                   />
                 </Link>
