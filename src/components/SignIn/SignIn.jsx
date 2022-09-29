@@ -9,9 +9,9 @@ export default function SignIn() {
   const { authenticated, setAuthenticated } = useContext(AppContext)
 
   // Form Input States
-  const [authID, setAuthID] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [authID, setAuthID] = useState("B826918791ID")
+  const [username, setUsername] = useState("demo")
+  const [password, setPassword] = useState("demo")
 
   // Form Button Busy State
   const [formIsBusy, setFormIsBusy] = useState(false)
