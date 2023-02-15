@@ -20,7 +20,7 @@ export function currency(value) {
 }
 
 export function generateRandomNumber(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.random() * (max - min) + min
 
 }
 
@@ -81,7 +81,7 @@ export function greeting() {
 }
 
 export async function apiRequest(url, method = "get", data = {}, config = {}) {
-    const BASE_URL = "https://paymaker.io/api/"
+    const BASE_URL = "https://api.paymaker.online/api/"
     const BEARER_TOKEN = localStorage.getItem("bearer-token")
     try {
         const request = await axios({
@@ -116,12 +116,12 @@ export function formatCardNumber(number) {
 
 export function obfuscateCardNumber(number) {
     const parsedNumber = String(number)
-    let output = "";
+    let output = ""
     for (let i = 0; i < parsedNumber.length; i++) {
         if (i < parsedNumber.length - 4) {
             output += "*"
         } else {
-            output += parsedNumber[i];
+            output += parsedNumber[i]
         }
     }
     return output
@@ -129,20 +129,20 @@ export function obfuscateCardNumber(number) {
 
 export function indexOfMax(arr) {
     if (arr.length === 0) {
-        return -1;
+        return -1
     }
 
-    var max = arr[0];
-    var maxIndex = 0;
+    var max = arr[0]
+    var maxIndex = 0
 
     for (var i = 1; i < arr.length; i++) {
         if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
+            maxIndex = i
+            max = arr[i]
         }
     }
 
-    return maxIndex;
+    return maxIndex
 }
 
 export function findInArr(key, value, arr) {
