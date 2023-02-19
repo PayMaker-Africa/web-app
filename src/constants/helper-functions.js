@@ -81,7 +81,7 @@ export function greeting() {
 }
 
 export async function apiRequest(url, method = "get", data = {}, config = {}) {
-    const BASE_URL = "https://api.paymaker.online/api/"
+    const BASE_URL = "https://api.paymakerafrica.com/api/"
     const BEARER_TOKEN = localStorage.getItem("bearer-token")
     try {
         const request = await axios({
