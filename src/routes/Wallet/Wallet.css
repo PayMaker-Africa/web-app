@@ -1,0 +1,3 @@
+.action-card-container {
+  @apply w-full md:w-[65%] xl:w-[35%] 2xl:w-[30%] p-2 h-fit xl:h-[70vh] shrink-0 grow-0 snap-center overflow-y-auto;
+}

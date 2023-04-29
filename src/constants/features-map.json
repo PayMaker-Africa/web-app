@@ -1,0 +1,343 @@
+[
+  [
+    { "1": "complete" },
+    { "2": "Incomplete" },
+    { "3": "Placholder" },
+    { "4": "Partially Complete" },
+    { "5": "Not Available" }
+  ],
+
+  {
+    "page": "Dashboard",
+    "features": [
+      {
+        "title": "Quick Summary",
+        "children": [
+          {
+            "title": "Bank Accounts",
+            "status": 1,
+            "description": ""
+          },
+          {
+            "title": "Wallet Balance",
+            "status": 1,
+            "description": ""
+          },
+          {
+            "title": "Payment Categories",
+            "status": 1,
+            "description": ""
+          },
+          {
+            "title": "Total Transactions - Today",
+            "status": 1,
+            "description": ""
+          },
+          {
+            "title": "Total Transactions - Current Month",
+            "status": 1,
+            "description": ""
+          },
+
+          {
+            "title": "Users",
+            "status": 1,
+            "description": ""
+          }
+        ],
+        "description": "Rectangular Shaped Cards Summarizing Most Commonly Accessed Data",
+        "status": 1
+      },
+
+      {
+        "title": "Charts Summary",
+        "children": [
+          { "title": "Bar Chart", "status": "3", "description": "Bar Chart" },
+          { "title": "Pie Chart", "status": "3", "description": "Pie Chart" }
+        ],
+        "description": "Bar & Pie Charts Without Filters Charting Transactions Data For The Past 7 Days",
+        "status": 3
+      },
+
+      {
+        "title": "Recent Transactions",
+        "children": [
+          {
+            "title": "Transactions History",
+            "description": "View Past Transactions In A Table",
+            "status": 3
+          }
+        ],
+        "description": "Transactions Table Without Filters For The Past 7 Days",
+        "status": 3
+      }
+    ]
+  },
+
+  {
+    "page": "Wallet",
+    "features": [
+      {
+        "title": "Wallets",
+        "children": [],
+        "description": "List Of All Wallets Owned By Business",
+        "status": 1
+      },
+
+      {
+        "title": "Wallet Actions",
+        "children": [
+          {
+            "title": "Create Wallet",
+            "status": 1,
+            "description": "Create A New Wallet"
+          },
+
+          {
+            "title": "Top Up Wallet",
+            "status": 3,
+            "description": "Add Funds To A Wallet"
+          },
+
+          {
+            "title": "Withdraw",
+            "status": 3,
+            "description": "Withdraw Funds From A Wallet To A Bank Account"
+          },
+
+          {
+            "title": "Transfer",
+            "status": 1,
+            "description": "Transfer Funds Within Or Across Wallets"
+          }
+        ],
+        "description": "Wallet Actions",
+        "status": 4
+      },
+
+      {
+        "title": "Wallets Transactions History",
+        "children": [
+          {
+            "title": "Bar Chart",
+            "status": 3,
+            "description": "Bar Chart"
+          },
+
+          {
+            "title": "Pie Chart",
+            "status": 3,
+            "description": "Pie Chart"
+          }
+        ],
+        "description": "Transactions History Table For Transactions On Wallets For The Past 7 Days",
+        "status": 3
+      }
+    ]
+  },
+
+  {
+    "page": "Accounts",
+    "features": [
+      {
+        "title": "Add New Account",
+        "children": [],
+        "description": "Form To Add A New Bank Account",
+        "status": 1
+      },
+
+      {
+        "title": "Manage Account",
+        "children": [],
+        "description": "Edit, Delete, Activate & Deactivate Bank Accounts",
+        "status": 4
+      }
+    ]
+  },
+
+  {
+    "page": "Cards",
+    "features": [
+      {
+        "title": "Add New Card",
+        "children": [],
+        "description": "Form To Add A New Debit/Credit Card. Brand & Issuer Detection Support Included",
+        "status": 1
+      },
+
+      {
+        "title": "Manage Cards",
+        "children": [],
+        "description": "Edit, Delete, Activate & Deactivate Saved Cards",
+        "status": 4
+      }
+    ]
+  },
+
+  {
+    "page": "Payments",
+    "features": [
+      {
+        "title": "Add New Payment Category",
+        "children": [],
+        "description": "Form To Add A New Payment Category.",
+        "status": 1
+      },
+
+      {
+        "title": "Manage Payment Categories",
+        "children": [],
+        "description": "Edit, Delete, Activate & Deactivate Saved Cards",
+        "status": 4
+      }
+    ]
+  },
+
+  {
+    "page": "Analytics",
+    "features": [
+      {
+        "title": "Highest Grossing Categories",
+        "children": [
+          {
+            "title": "Today",
+            "status": 1,
+            "description": "Highest Grossing Category For Current Day"
+          },
+
+          {
+            "title": "Past 7 Days",
+            "status": 1,
+            "description": "Highest Grossing Category For The Past 7 Days"
+          },
+
+          {
+            "title": "This Week",
+            "status": 1,
+            "description": "Highest Grossing Category Since The Beginning Of Current Week"
+          },
+
+          {
+            "title": "This Month",
+            "status": 1,
+            "description": "Highest Grossing Category Since The Beginning Of Current Month"
+          },
+
+          {
+            "title": "Past 31 Days",
+            "status": 1,
+            "description": "Highest Grossing Category For The Past 31 Days"
+          }
+        ],
+        "description": "Rectangular Shaped Cards Summarizing Payment Categories Grossing Highest",
+        "status": 1
+      },
+
+      {
+        "title": "Most Transacted Categories",
+        "children": [
+          {
+            "title": "Today",
+            "status": 1,
+            "description": "Most Transacted Category For Current Day"
+          },
+
+          {
+            "title": "Past 7 Days",
+            "status": 1,
+            "description": "Most Transacted Category For The Past 7 Days"
+          },
+
+          {
+            "title": "This Week",
+            "status": 1,
+            "description": "Most Transacted Category Since The Beginning Of Current Week"
+          },
+
+          {
+            "title": "This Month",
+            "status": 1,
+            "description": "Most Transacted Category Since The Beginning Of Current Month"
+          },
+
+          {
+            "title": "Past 31 Days",
+            "status": 1,
+            "description": "Most Transacted Category For The Past 31 Days"
+          }
+        ],
+        "description": "Rectangular Shaped Cards Summarizing Payment Categories With The Highest Number Of Transactions",
+        "status": 1
+      },
+
+      {
+        "title": "Charts Analytics",
+        "children": [
+          {
+            "title": "Bar Chart",
+            "description": "Bar Chart For Selected Filters",
+            "status": 3
+          },
+
+          {
+            "title": "Pie Chart",
+            "description": "Pie Chart For Selected Filters",
+            "status": 3
+          }
+        ],
+        "description": "Robust Transactions Table With Duration & Type Filters",
+        "status": 3
+      },
+
+      {
+        "title": "Transactions History",
+        "children": [
+          {
+            "title": "Transactions History",
+            "description": "View Past Transactions In A Table",
+            "status": 3
+          },
+
+          {
+            "title": "Doughnut Chart",
+            "description": "Doughnut Chart",
+            "status": 3
+          }
+        ],
+        "description": "Robust Transactions Table With Duration & Type Filters",
+        "status": 3
+      }
+    ]
+  },
+
+  {
+    "page": "Users",
+    "features": [
+      {
+        "title": "Add New User",
+        "children": [],
+        "description": "Form To Add A New User.",
+        "status": 1
+      },
+
+      {
+        "title": "Manage Users",
+        "children": [],
+        "description": "Edit, Delete, Activate & Deactivate Saved Cards",
+        "status": 3
+      }
+    ]
+  },
+
+  {
+    "page": "QR",
+    "features": [
+      {
+        "title": "Edit QR Options",
+        "children": [],
+        "description": "Change QR Options For Business & Payment Categories. e.g. Logo, Text",
+        "status": 1
+      }
+    ]
+  }
+]
