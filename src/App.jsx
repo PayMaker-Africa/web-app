@@ -189,7 +189,7 @@ export default function App() {
 
             // Miscs
           }}>
-          {authenticated ? (
+          {!authenticated ? (
             <Layout>
               <Toast options={toastOptions} />
             </Layout>
